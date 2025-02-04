@@ -1,0 +1,19 @@
+{
+  "name": "atm-cli-nodejs",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "arisculala",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "big.js": "^6.2.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
