@@ -13,39 +13,24 @@ class User {
   }
 
   showTransactions(filterType = null) {
-    // filter the transactions by type if filterType is provided
     const transactionsToShow = filterType
-    ? this.transactions.filter(transaction => transaction.type === filterType)
-    : this.transactions;
+        ? this.transactions.filter(transaction => transaction.type === filterType)
+        : this.transactions;
 
     if (transactionsToShow.length === 0) {
-      console.log("\nNo transactions found.\n");
-      return;s
+        console.log("\nNo transactions found.\n");
+        return;
     }
 
-    console.log("\n");
-    console.log("All transactions:");
-    transactionsToShow.forEach((transaction, index) => {
-      let transactionDetails = `${index + 1}. Type: ${transaction.type}`;
+    // format transactions for table output
+    const tableData = transactionsToShow.map(transaction => ({
+      Type: transaction.type || "N/A",
+      Amount: transaction.amount ? `$${transaction.amount}` : "-",
+      Recipient: transaction.recipient || "-",
+      Date: transaction.date ? new Date(transaction.date).toLocaleString() : new Date().toLocaleString()
+    }));
 
-      if ([ATMService.TransactionType.DEPOSIT, 
-        ATMService.TransactionType.WITHDRAW, 
-        ATMService.TransactionType.TRANSFER].includes(transaction.type))
-      {
-        transactionDetails += `, Amount: $${transaction.amount}`;
-      }
-  
-      // If transfer transaction, show the recipient
-      if (transaction.type === ATMService.TransactionType.TRANSFER && transaction.recipient) {
-        transactionDetails += `, Recipient: ${transaction.recipient}`;
-      }
-  
-      const transactionDate = transaction.date || new Date().toLocaleString(); // Use current date if not provided
-      transactionDetails += `, Date: ${transactionDate}`;
-  
-      console.log(transactionDetails);
-    });
-    console.log("\n");
+    console.table(tableData);
   }
 }
 

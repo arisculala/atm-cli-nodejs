@@ -43,9 +43,10 @@ describe("User Model", () => {
 
     user.showTransactions();
 
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("All transactions:"));
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("Type: deposit, Amount: $50"));
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("Type: withdraw, Amount: $30"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("deposit"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("$50"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("withdraw"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("$30"));
 
     consoleSpy.mockRestore();
   });
@@ -58,8 +59,9 @@ describe("User Model", () => {
 
     user.showTransactions(ATMService.TransactionType.DEPOSIT);
 
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("Type: deposit, Amount: $50"));
-    expect(consoleSpy).not.toHaveBeenCalledWith(expect.stringContaining("Type: withdraw"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("deposit"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("$50"));
+    expect(consoleSpy).not.toHaveBeenCalledWith(expect.stringContaining("withdraw"));
 
     consoleSpy.mockRestore();
   });
@@ -81,7 +83,9 @@ describe("User Model", () => {
 
     user.showTransactions();
 
-    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("Type: transfer, Amount: $20, Recipient: JaneDoe"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("transfer"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("$20"));
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining("JaneDoe"));
 
     consoleSpy.mockRestore();
   });
